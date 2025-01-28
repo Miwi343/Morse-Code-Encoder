@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // ContentView.swift
 import SwiftUI
 import AVFoundation
@@ -43,10 +42,11 @@ struct TranslatingView: View {
     let message: String
     @Environment(\.dismiss) private var dismiss
     @StateObject private var flashlightService = FlashlightService()
+    @State private var backgroundColor: Color = .black
     
     var body: some View {
         ZStack {
-            Color.black.ignoresSafeArea()
+            backgroundColor.ignoresSafeArea()
             
             VStack {
                 Text("TRANSLATING")
@@ -68,7 +68,9 @@ struct TranslatingView: View {
             }
         }
         .onAppear {
-            flashlightService.flashMorseCode(for: message) {
+            flashlightService.flashMorseCode(for: message, screenFlash: { isOn in
+                backgroundColor = isOn ? .white : .black
+            }) {
                 // Transmission complete
             }
         }
@@ -114,7 +116,7 @@ class FlashlightService: ObservableObject {
         device.unlockForConfiguration()
     }
     
-    func flashMorseCode(for message: String, completion: @escaping () -> Void) {
+    func flashMorseCode(for message: String, screenFlash: @escaping (Bool) -> Void, completion: @escaping () -> Void) {
         let morse = MorseCode.encode(message)
         var delay: TimeInterval = 0
         
@@ -123,19 +125,23 @@ class FlashlightService: ObservableObject {
             case ".":
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                     self.toggleTorch(on: true)
+                    screenFlash(true)
                 }
                 delay += 0.2
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                     self.toggleTorch(on: false)
+                    screenFlash(false)
                 }
                 delay += 0.2
             case "-":
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                     self.toggleTorch(on: true)
+                    screenFlash(true)
                 }
                 delay += 0.6
                 DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
                     self.toggleTorch(on: false)
+                    screenFlash(false)
                 }
                 delay += 0.2
             case " ":
@@ -149,29 +155,4 @@ class FlashlightService: ObservableObject {
             completion()
         }
     }
-=======
-//
-//  ContentView.swift
-//  Morse Code Encoder
-//
-//  Created by Mihir Kulshreshtha on 1/26/25.
-//
-
-import SwiftUI
-
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
-    }
-}
-
-#Preview {
-    ContentView()
->>>>>>> ContentViewUpdate
 }
