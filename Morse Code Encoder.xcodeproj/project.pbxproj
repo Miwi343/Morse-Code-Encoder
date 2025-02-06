@@ -14,6 +14,9 @@
 		2A15FEAB2D471079001B873D /* Morse_Code_EncoderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A15FEAA2D471079001B873D /* Morse_Code_EncoderTests.swift */; };
 		2A15FEB52D471079001B873D /* Morse_Code_EncoderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A15FEB42D471079001B873D /* Morse_Code_EncoderUITests.swift */; };
 		2A15FEB72D471079001B873D /* Morse_Code_EncoderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A15FEB62D471079001B873D /* Morse_Code_EncoderUITestsLaunchTests.swift */; };
+		2A15FEC42D553C53001B873D /* TranslatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A15FEC32D553C53001B873D /* TranslatingView.swift */; };
+		2A15FEC82D553DCC001B873D /* MorseCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A15FEC72D553DCC001B873D /* MorseCode.swift */; };
+		2A15FECA2D553DEF001B873D /* FlashlightService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A15FEC92D553DEF001B873D /* FlashlightService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +48,9 @@
 		2A15FEB02D471079001B873D /* Morse Code EncoderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Morse Code EncoderUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A15FEB42D471079001B873D /* Morse_Code_EncoderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morse_Code_EncoderUITests.swift; sourceTree = "<group>"; };
 		2A15FEB62D471079001B873D /* Morse_Code_EncoderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Morse_Code_EncoderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2A15FEC32D553C53001B873D /* TranslatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatingView.swift; sourceTree = "<group>"; };
+		2A15FEC72D553DCC001B873D /* MorseCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MorseCode.swift; sourceTree = "<group>"; };
+		2A15FEC92D553DEF001B873D /* FlashlightService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlashlightService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +103,9 @@
 			children = (
 				2A15FE982D471077001B873D /* Morse_Code_EncoderApp.swift */,
 				2A15FE9A2D471077001B873D /* ContentView.swift */,
+				2A15FEC92D553DEF001B873D /* FlashlightService.swift */,
+				2A15FEC72D553DCC001B873D /* MorseCode.swift */,
+				2A15FEC32D553C53001B873D /* TranslatingView.swift */,
 				2A15FE9C2D471079001B873D /* Assets.xcassets */,
 				2A15FE9E2D471079001B873D /* Morse_Code_Encoder.entitlements */,
 				2A15FE9F2D471079001B873D /* Preview Content */,
@@ -261,6 +270,9 @@
 			files = (
 				2A15FE9B2D471077001B873D /* ContentView.swift in Sources */,
 				2A15FE992D471077001B873D /* Morse_Code_EncoderApp.swift in Sources */,
+				2A15FEC42D553C53001B873D /* TranslatingView.swift in Sources */,
+				2A15FEC82D553DCC001B873D /* MorseCode.swift in Sources */,
+				2A15FECA2D553DEF001B873D /* FlashlightService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

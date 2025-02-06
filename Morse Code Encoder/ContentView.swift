@@ -37,122 +37,14 @@ struct ContentView: View {
     }
 }
 
-// TranslatingView.swift
-struct TranslatingView: View {
-    let message: String
-    @Environment(\.dismiss) private var dismiss
-    @StateObject private var flashlightService = FlashlightService()
-    @State private var backgroundColor: Color = .black
-    
-    var body: some View {
-        ZStack {
-            backgroundColor.ignoresSafeArea()
-            
-            VStack {
-                Text("TRANSLATING")
-                    .font(.largeTitle)
-                    .foregroundColor(.white)
-                    .padding(.top, 50)
-                
-                Spacer()
-                
-                Button("<-- BACK") {
-                    dismiss()
-                }
-                .foregroundColor(.white)
-                .frame(maxWidth: .infinity)
-                .padding()
-                .background(Color.blue)
-                .cornerRadius(8)
-                .padding()
-            }
-        }
-        .onAppear {
-            flashlightService.flashMorseCode(for: message, screenFlash: { isOn in
-                backgroundColor = isOn ? .white : .black
-            }) {
-                // Transmission complete
-            }
-        }
-    }
-}
+
 
 // MorseViewModel.swift
 class MorseViewModel: ObservableObject {
     @Published var message: String = ""
 }
 
-// MorseCode.swift
-struct MorseCode {
-    static let morseAlphabet: [Character: String] = [
-        "A": ".-", "B": "-...", "C": "-.-.", "D": "-..", "E": ".",
-        "F": "..-.", "G": "--.", "H": "....", "I": "..", "J": ".---",
-        "K": "-.-", "L": ".-..", "M": "--", "N": "-.", "O": "---",
-        "P": ".--.", "Q": "--.-", "R": ".-.", "S": "...", "T": "-",
-        "U": "..-", "V": "...-", "W": ".--", "X": "-..-", "Y": "-.--",
-        "Z": "--..", "0": "-----", "1": ".----", "2": "..---",
-        "3": "...--", "4": "....-", "5": ".....", "6": "-....",
-        "7": "--...", "8": "---..", "9": "----.", " ": " "
-    ]
-    
-    static func encode(_ message: String) -> String {
-        return message.uppercased().map { char in
-            morseAlphabet[char] ?? ""
-        }.joined(separator: " ")
-    }
-}
 
-// FlashlightService.swift
-import AVFoundation
-
-class FlashlightService: ObservableObject {
-    private let device = AVCaptureDevice.default(for: .video)
-    
-    func toggleTorch(on: Bool) {
-        guard let device = device, device.hasTorch else { return }
-        
-        try? device.lockForConfiguration()
-        device.torchMode = on ? .on : .off
-        device.unlockForConfiguration()
-    }
-    
-    func flashMorseCode(for message: String, screenFlash: @escaping (Bool) -> Void, completion: @escaping () -> Void) {
-        let morse = MorseCode.encode(message)
-        var delay: TimeInterval = 0
-        
-        for character in morse {
-            switch character {
-            case ".":
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.toggleTorch(on: true)
-                    screenFlash(true)
-                }
-                delay += 0.2
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.toggleTorch(on: false)
-                    screenFlash(false)
-                }
-                delay += 0.2
-            case "-":
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.toggleTorch(on: true)
-                    screenFlash(true)
-                }
-                delay += 0.6
-                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-                    self.toggleTorch(on: false)
-                    screenFlash(false)
-                }
-                delay += 0.2
-            case " ":
-                delay += 0.6  // Space between letters (3 seconds)
-            default:
-                delay += 1.4  // Space between words (7 seconds)
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            completion()
-        }
-    }
+#Preview {
+    ContentView()
 }

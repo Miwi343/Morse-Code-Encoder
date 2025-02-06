@@ -15,3 +15,7 @@ struct Morse_Code_EncoderApp: App {
         }
     }
 }
+
+#Preview {
+    ContentView()
+}
